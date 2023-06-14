@@ -182,8 +182,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -90
-    m_UpperAngle: 100
+    m_LowerAngle: 90
+    m_UpperAngle: 280
 --- !u!1 &490751173154525230
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ Transform:
   - {fileID: 7920174757909706085}
   - {fileID: 356087097574698944}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7270317697731534374
 Animator:
@@ -1814,8 +1814,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -90
-    m_UpperAngle: 100
+    m_LowerAngle: 90
+    m_UpperAngle: 280
 --- !u!1 &7922385293251309766
 GameObject:
   m_ObjectHideFlags: 0

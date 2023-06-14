@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Animation")]
     public Animator anim;
     public bool leftPlayer = false;
+    private float xDir;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,33 +32,42 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Movement(){
-       
-        
-
-        if(leftPlayer && (Input.GetKey(KeyCode.W) ||Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) ){
-             float xDir = Input.GetAxis("Horizontal");
-            rb.velocity = new Vector2(xDir * (movementForce*Time.deltaTime),rb.velocity.y);
-            if (Mathf.Abs(xDir) > 0) 
-            {
-                anim.SetBool("Walk", true);
+        if(leftPlayer ){
+            if(Input.GetKey(KeyCode.A)){
+                xDir = -1;
+            }else if(Input.GetKey(KeyCode.D)){
+                xDir = 1;
             }else{
-                anim.SetBool("Walk", false);
+                xDir = 0;
+            }
+        }else{
+            if(Input.GetKey(KeyCode.LeftArrow)){
+                xDir = -1;
+            }else if(Input.GetKey(KeyCode.RightArrow)){
+                xDir = 1;
+            }else{
+                xDir = 0;
             }
         }
 
-        if(!leftPlayer && (Input.GetKey(KeyCode.UpArrow) ||Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)) ){
-             float xDir = Input.GetAxis("Horizontal");
-            rb.velocity = new Vector2(xDir * (movementForce*Time.deltaTime),rb.velocity.y);
-            if (Mathf.Abs(xDir) > 0) 
-            {
-                anim.SetBool("Walk", true);
-            }else{
-                anim.SetBool("Walk", false);
-            }
+        rb.velocity = new Vector2(xDir * (movementForce*Time.deltaTime),rb.velocity.y);
+        if (Mathf.Abs(xDir) > 0) {
+            anim.SetBool("Walk", true);
+        }else{
+            anim.SetBool("Walk", false);
         }
         // animatiom
 
         
+    }
+
+    private void LeftMovement(){
+        
+            rb.velocity = new Vector2(xDir * (movementForce*Time.deltaTime),rb.velocity.y);
+    }
+
+    private void WalkAnim(){
+
     }
 
     private void Jump(){

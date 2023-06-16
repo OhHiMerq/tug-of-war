@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     public float movementForce;
-    public float jumpForce;
 
     [Range(0f, 100f)] public float raycastDistance = 1.5f;
     public LayerMask whatIsGround;
@@ -17,9 +16,17 @@ public class PlayerMovement : MonoBehaviour
     public Animator anim;
     public bool leftPlayer = false;
     private float xDir;
+
+public float maxVelocity = 8f;
+    public float baseVelocity = 0f; // The base velocity of the player
+    public float velocityIncreasePerClick = 0.5f; // The amount of velocity increase per key press
+    public float velocityDecreaseRate = 1f; // The rate at which the velocity decreases when not spamming
+
+    public float currentVelocity; // The current velocity of the player
     // Start is called before the first frame update
     void Start()
     {
+      currentVelocity = baseVelocity;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -28,55 +35,45 @@ public class PlayerMovement : MonoBehaviour
     {
         isGround = IsGrounded();
         Movement();
-        Jump();
     }
 
     private void Movement(){
         if(leftPlayer ){
-            if(Input.GetKey(KeyCode.A)){
-                xDir = -1;
-            }else if(Input.GetKey(KeyCode.D)){
-                xDir = 1;
-            }else{
-                xDir = 0;
-            }
-        }else{
-            if(Input.GetKey(KeyCode.LeftArrow)){
-                xDir = -1;
-            }else if(Input.GetKey(KeyCode.RightArrow)){
-                xDir = 1;
-            }else{
-                xDir = 0;
-            }
+            if (Input.GetKeyDown(KeyCode.W) && Mathf.Abs(currentVelocity) < maxVelocity && isGround)
+        {
+            currentVelocity -= velocityIncreasePerClick;
         }
 
-        rb.velocity = new Vector2(xDir * (movementForce*Time.deltaTime),rb.velocity.y);
-        if (Mathf.Abs(xDir) > 0) {
+        if (!Input.GetKey(KeyCode.W) && Mathf.Abs(currentVelocity) > baseVelocity)
+        {
+            currentVelocity += velocityDecreaseRate * Time.deltaTime;
+            currentVelocity = Mathf.Min(currentVelocity, baseVelocity);
+        }
+        }else{
+           if (Input.GetKeyDown(KeyCode.UpArrow) && Mathf.Abs(currentVelocity) < maxVelocity && isGround)
+        {
+            currentVelocity += velocityIncreasePerClick;
+        }
+
+        if (!Input.GetKey(KeyCode.UpArrow) && Mathf.Abs(currentVelocity) > baseVelocity)
+        {
+            currentVelocity -= velocityDecreaseRate * Time.deltaTime;
+            currentVelocity = Mathf.Max(currentVelocity, baseVelocity);
+        }
+        }
+
+        rb.velocity = new Vector2(currentVelocity*(movementForce* Time.deltaTime),rb.velocity.y);
+        if (Mathf.Abs(currentVelocity) > baseVelocity) {
             anim.SetBool("Walk", true);
         }else{
             anim.SetBool("Walk", false);
         }
         // animatiom
 
-        
-    }
-
-    private void LeftMovement(){
-        
-            rb.velocity = new Vector2(xDir * (movementForce*Time.deltaTime),rb.velocity.y);
-    }
-
-    private void WalkAnim(){
 
     }
 
-    private void Jump(){
-        if(Input.GetKey(KeyCode.W) && IsGrounded()){
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.deltaTime);
-        }
-    }
-
-    private bool IsGrounded() 
+    private bool IsGrounded()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, whatIsGround);
         return hit.collider != null;

@@ -1410,7 +1410,7 @@ GameObject:
   - component: {fileID: 6939415842872993836}
   m_Layer: 6
   m_Name: Hips
-  m_TagString: Untagged
+  m_TagString: RightPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

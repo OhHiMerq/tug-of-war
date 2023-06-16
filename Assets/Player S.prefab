@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restingAngle: 0
-  force: 25
+  force: 500
 --- !u!1 &1158329961980522713
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +240,7 @@ Transform:
   - {fileID: 5770512542764443835}
   - {fileID: 6125640235473772930}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1227199605614503836
 Animator:
@@ -650,7 +650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restingAngle: 0
-  force: 25
+  force: 500
 --- !u!1 &4431799177887417495
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,7 +849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restingAngle: 0
-  force: 750
+  force: 1500
 --- !u!1 &4592757065735786947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,7 +1645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restingAngle: -10
-  force: 25
+  force: 500
 --- !u!1 &7663213317864732586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,7 +1703,7 @@ MonoBehaviour:
     m_Bits: 128
   isGround: 0
   anim: {fileID: 1227199605614503836}
-  leftPlayer: 0
+  leftPlayer: 1
 --- !u!212 &6063294888552757509
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2264,4 +2264,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restingAngle: 10
-  force: 25
+  force: 500

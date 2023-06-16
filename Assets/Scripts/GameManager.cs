@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI redScoreUI;
     // public static GameObject winCard;
     public TextMeshProUGUI winTitle;
+    public GameObject helpObj;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +54,10 @@ SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         blueScore = 0;
         redScore = 0;
+    }
+
+    public void ToggleHelp(){
+        helpObj.SetActive(!helpObj.activeSelf);
     }
 
 }
